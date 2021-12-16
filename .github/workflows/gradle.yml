@@ -1,0 +1,17 @@
+name: Gradle CI
+on: [push, pull_request]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: temurin
+          check-latest: true
+      - uses: gradle/wrapper-validation-action@v1
+      - run: chmod +x ./gradlew
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build

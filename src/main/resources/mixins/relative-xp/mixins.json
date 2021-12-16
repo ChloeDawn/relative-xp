@@ -1,0 +1,11 @@
+{
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "required": true,
+  "package": "dev.sapphic.relativexp.mixin",
+  "mixins": [
+    "AnvilMenuMixin",
+    "EnchantmentMenuMixin"
+  ],
+  "refmap": "mixins/relative-xp/refmap.json"
+}

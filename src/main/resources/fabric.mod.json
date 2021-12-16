@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "relative-xp",
+  "name": "Relative XP",
+  "version": "$version",
+  "description": "Relativizes the costs of enchanting and anvil combining.",
+  "license": "Apache-2.0",
+  "depends": {
+    "fabricloader": ">=0.12.11",
+    "java": ">=8"
+  },
+  "mixins": [
+    "mixins/relative-xp/mixins.json"
+  ],
+  "authors": [
+    "Chloe Dawn"
+  ],
+  "contact": {
+    "homepage": "https://git.io/JD2ZI",
+    "sources": "https://git.io/JD2ZI",
+    "issues": "https://git.io/JD2ZL"
+  }
+}
