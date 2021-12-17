@@ -44,6 +44,8 @@ abstract class AnvilMenuMixin extends ItemCombinerMenu {
               + "Lnet/minecraft/world/entity/player/Player;"
               + "Lnet/minecraft/world/item/ItemStack;"
               + ")V",
+      require = 1,
+      allow = 1,
       at =
           @At(
               value = "INVOKE",
@@ -52,9 +54,7 @@ abstract class AnvilMenuMixin extends ItemCombinerMenu {
                   "Lnet/minecraft/world/entity/player/Player;"
                       + "giveExperienceLevels("
                       + "I"
-                      + ")V"),
-      require = 1,
-      allow = 1)
+                      + ")V"))
   private void takeExperiencePoints(final Player player, final int cost) {
     // Unary minus the given level cost as it is negative when we receive it
     player.giveExperiencePoints(-XpMth.pointsForLevel(-cost));
