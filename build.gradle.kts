@@ -10,7 +10,7 @@ plugins {
 group = "dev.sapphic"
 version = "1.0.0"
 
-if (System.getenv("CI").toBoolean()) {
+if ("CI" in System.getenv()) {
   version = "$version-${versioning.info.build}"
 }
 
