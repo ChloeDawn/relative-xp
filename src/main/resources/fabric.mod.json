@@ -7,7 +7,8 @@
   "license": "Apache-2.0",
   "depends": {
     "fabricloader": ">=0.12.11",
-    "java": ">=8"
+    "java": ">=8",
+    "minecraft": ">=1.17"
   },
   "mixins": [
     "mixins/relative-xp/mixins.json"
@@ -16,8 +17,8 @@
     "Chloe Dawn"
   ],
   "contact": {
-    "homepage": "https://git.io/JD2ZI",
-    "sources": "https://git.io/JD2ZI",
-    "issues": "https://git.io/JD2ZL"
+    "homepage": "https://github.com/ChloeDawn/relative-xp",
+    "sources": "https://github.com/ChloeDawn/relative-xp/tree/$version",
+    "issues": "https://github.com/ChloeDawn/relative-xp/issues"
   }
 }

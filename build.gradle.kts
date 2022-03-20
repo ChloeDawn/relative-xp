@@ -1,8 +1,8 @@
 import java.time.Instant
 
 plugins {
-  id(/*net.fabricmc.*/ "fabric-loom") version "0.10.64"
-  id("io.github.juuxel.loom-quiltflower-mini") version "1.2.1"
+  id(/*net.fabricmc.*/ "fabric-loom") version "0.12.5"
+  id("io.github.juuxel.loom-quiltflower") version "1.6.1"
   id("net.nemerosa.versioning") version "2.15.1"
   id("org.gradle.signing")
 }
@@ -37,13 +37,23 @@ loom {
   }
 }
 
+quiltflower {
+  preferences {
+    patternMatching(false)
+  }
+}
+
 dependencies {
-  minecraft("com.mojang:minecraft:1.18.1")
-  mappings(loom.officialMojangMappings())
+  minecraft("com.mojang:minecraft:1.18.2")
 
-  modImplementation("net.fabricmc:fabric-loader:0.12.12")
-  implementation("org.checkerframework:checker-qual:3.20.0")
+  mappings(loom.layered {
+    officialMojangMappings {
+      nameSyntheticMembers = true
+    }
+  })
 
+  modImplementation("net.fabricmc:fabric-loader:0.13.3")
+  implementation("org.checkerframework:checker-qual:3.21.3")
   testImplementation("com.google.truth:truth:1.1.3")
 }
 
@@ -55,9 +65,10 @@ tasks {
       isFork = true
       compilerArgs.addAll(
         listOf(
-          "-Xlint:all",
-          "-Xlint:-processing",
-          "-parameters" // JEP 118
+          "-Xlint:all", "-Xlint:-processing",
+          // Enable parameter name class metadata 
+          // https://openjdk.java.net/jeps/118
+          "-parameters"
         )
       )
       release.set(8)
@@ -122,19 +133,15 @@ tasks {
 
       sign(remapJar.get())
     }
+
     val signSourcesJar by creating(Sign::class) {
       dependsOn(remapSourcesJar)
-      /*
-      Loom does not expose remapSourcesJar as a Jar task
-      so we target the original sourcesJar task here
-      NOTE This will fail when the internals change
-      */
 
       doFirst {
-        antSignJar(getByName<Jar>("sourcesJar"))
+        antSignJar(remapSourcesJar.get())
       }
 
-      sign(getByName<Jar>("sourcesJar"))
+      sign(remapSourcesJar.get())
     }
 
     assemble {
